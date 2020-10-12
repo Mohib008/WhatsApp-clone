@@ -3,6 +3,18 @@ import './App.css';
 import Chat from './Components/Chat';
 import Sidebar from './Components/Sidebar';
 
+
+useEffect(() => {
+  const pusher = new Pusher('34934fb3179b91572f8d', {
+    cluster: 'us2'
+  });
+
+  const channel = pusher.subscribe('messages');
+  channel.bind('inserted', (data) => {
+    alert(JSON.stringify(data));
+  });
+}, [])
+
 function App() {
   return (
     <div className="app">
